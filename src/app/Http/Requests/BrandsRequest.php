@@ -2,9 +2,10 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Foundation\Http\FormRequest;
 use App\Http\Requests\Request;
 
-class BrandsRequest extends Request
+class BrandsRequest extends FormRequest
 {
 
     /**
