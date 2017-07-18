@@ -121,12 +121,12 @@ class CartController extends Controller
 
         // Create the Cart
         Cart::create(
-             [
+            [
                 'user_id'    => $user_id,
                 'product_id' => $product_id,
                 'qty'        => $qty,
                 'total'      => $total
-            ]
+             ]
         );
 
         // then redirect back
