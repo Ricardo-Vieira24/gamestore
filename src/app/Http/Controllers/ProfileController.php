@@ -11,15 +11,16 @@ use App\Http\Traits\CategoryTrait;
 use App\Http\Traits\SearchTrait;
 use App\Http\Traits\CartTrait;
 
-
-class ProfileController extends Controller {
+class ProfileController extends Controller
+{
 
 
     use BrandAllTrait, CategoryTrait, SearchTrait, CartTrait;
 
 
     /* This page uses the Auth Middleware */
-    public function __construct() {
+    public function __construct()
+    {
         $this->middleware('auth');
         // Reference the main constructor.
         parent::__construct();
@@ -31,7 +32,8 @@ class ProfileController extends Controller {
      *
      * @return mixed
      */
-    public function index() {
+    public function index()
+    {
 
         // From Traits/CategoryTrait.php
         // ( Show Categories in side-nav )
@@ -60,6 +62,4 @@ class ProfileController extends Controller {
 
         return view('profile.index', compact('categories', 'brands', 'search', 'cart_count', 'username', 'orders'));
     }
-    
-
 }

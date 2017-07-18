@@ -2,9 +2,11 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Foundation\Http\FormRequest;
 use App\Http\Requests\Request;
 
-class ProductEditRequest extends Request {
+class ProductEditRequest extends FormRequest
+{
 
     /**
      * Determine if the user is authorized to make this request.
@@ -21,7 +23,8 @@ class ProductEditRequest extends Request {
      *
      * @return array
      */
-    public function rules() {
+    public function rules()
+    {
         return [
             'product_name' => 'required|max:75|min:3',
             'product_qty' => 'required|max:2|min:1',
@@ -35,5 +38,4 @@ class ProductEditRequest extends Request {
             'product_spec' => 'max:3500',
         ];
     }
-
 }

@@ -13,17 +13,19 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Input;
 
-class AdminController extends Controller {
+class AdminController extends Controller
+{
 
     use CartTrait;
 
 
     /**
      * Show the Admin Dashboard
-     * 
+     *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function index() {
+    public function index()
+    {
 
         // From Traits/CartTrait.php
         // ( Count how many items in Cart for signed in user )
@@ -54,11 +56,12 @@ class AdminController extends Controller {
 
     /**
      * Delete a user
-     * 
+     *
      * @param $id
      * @return mixed
      */
-    public function delete($id) {
+    public function delete($id)
+    {
 
         // Find the product id and delete it from DB.
         $user = User::findOrFail($id);
@@ -79,11 +82,12 @@ class AdminController extends Controller {
 
 
     /** Delete a cart session
-     * 
+     *
      * @param $id
      * @return mixed
      */
-    public function deleteCart($id) {
+    public function deleteCart($id)
+    {
         // Find the product id and delete it from DB.
         $cart = Cart::findOrFail($id);
 
@@ -101,11 +105,12 @@ class AdminController extends Controller {
 
     /**
      * Update the Product Quantity if empty for Admin dashboard
-     * 
+     *
      * @param Request $request
      * @return mixed
      */
-    public function update(Request $request) {
+    public function update(Request $request)
+    {
 
         // Validate email and password.
         $this->validate($request, [
@@ -128,16 +133,12 @@ class AdminController extends Controller {
             flash()->error('Error', 'Cannot update product quantity because you are signed in as a test user.');
         } else {
             // Update your product qty
-            $product_qty->update(array(
+            $product_qty->update([
                 'product_qty' => $qty
-            ));
+            ]);
         }
 
 
         return redirect()->back();
-        
     }
-
-    
-
 }

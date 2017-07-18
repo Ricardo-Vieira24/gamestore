@@ -5,7 +5,8 @@ namespace App;
 use App\Product;
 use Illuminate\Database\Eloquent\Model;
 
-class Brand extends Model {
+class Brand extends Model
+{
 
     protected $table = 'brands';
 
@@ -19,10 +20,8 @@ class Brand extends Model {
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function productBrand() {
+    public function productBrand()
+    {
         return $this->hasMany('App\Product', 'brand_id');
     }
-
-
-
 }

@@ -2,7 +2,8 @@
 
 namespace App\Http\Utilities;
 
-class States {
+class States
+{
 
     /**
      * Array of Countries.
@@ -71,8 +72,8 @@ class States {
      *
      * @return array
      */
-    public static function all() {
+    public static function all()
+    {
         return array_keys(static::$states);
     }
-
 }

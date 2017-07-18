@@ -13,8 +13,8 @@ use App\Http\Traits\CategoryTrait;
 use App\Http\Traits\SearchTrait;
 use App\Http\Traits\CartTrait;
 
-
-class OrderByController extends ProductsController {
+class OrderByController extends ProductsController
+{
 
     use BrandAllTrait, CategoryTrait, SearchTrait, CartTrait;
 
@@ -26,7 +26,8 @@ class OrderByController extends ProductsController {
      * @param Product $product
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function productsPriceHighest($id, Product $product) {
+    public function productsPriceHighest($id, Product $product)
+    {
 
         // Get the Category ID
         $categories = Category::where('id', '=', $id)->get();
@@ -61,7 +62,8 @@ class OrderByController extends ProductsController {
      * @param Product $product
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function productsPriceLowest($id, Product $product) {
+    public function productsPriceLowest($id, Product $product)
+    {
 
         // Get the Category ID
         $categories = Category::where('id', '=', $id)->get();
@@ -97,7 +99,8 @@ class OrderByController extends ProductsController {
      * @param Product $product
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function productsAlphaHighest($id, Product $product) {
+    public function productsAlphaHighest($id, Product $product)
+    {
 
         // Get the Category ID
         $categories = Category::where('id', '=', $id)->get();
@@ -132,7 +135,8 @@ class OrderByController extends ProductsController {
      * @param Product $product
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function productsAlphaLowest($id, Product $product) {
+    public function productsAlphaLowest($id, Product $product)
+    {
 
         // Get the Category ID
         $categories = Category::where('id', '=', $id)->get();
@@ -159,7 +163,7 @@ class OrderByController extends ProductsController {
         // ( Count how many items in Cart for signed in user )
         $cart_count = $this->countProductsInCart();
 
-        return view('category.show', ['products' => $products], compact('categories', 'category', 'brands','search', 'count', 'cart_count'));
+        return view('category.show', ['products' => $products], compact('categories', 'category', 'brands', 'search', 'count', 'cart_count'));
     }
 
 
@@ -167,7 +171,8 @@ class OrderByController extends ProductsController {
      * @param Product $product
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function productsNewest($id, Product $product) {
+    public function productsNewest($id, Product $product)
+    {
 
         // Get the Category ID
         $categories = Category::where('id', '=', $id)->get();
@@ -207,7 +212,8 @@ class OrderByController extends ProductsController {
      * @param Product $product
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function productsPriceHighestBrand($id, Product $product) {
+    public function productsPriceHighestBrand($id, Product $product)
+    {
 
         // Get the Brand ID
         $brands = Brand::where('id', '=', $id)->get();
@@ -241,7 +247,8 @@ class OrderByController extends ProductsController {
      * @param Product $product
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function productsPriceLowestBrand($id, Product $product) {
+    public function productsPriceLowestBrand($id, Product $product)
+    {
 
 
         // Get the Brand ID
@@ -277,7 +284,8 @@ class OrderByController extends ProductsController {
      * @param Product $product
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function productsAlphaHighestBrand($id, Product $product) {
+    public function productsAlphaHighestBrand($id, Product $product)
+    {
 
         // Get the Brand ID
         $brands = Brand::where('id', '=', $id)->get();
@@ -311,7 +319,8 @@ class OrderByController extends ProductsController {
      * @param Product $product
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function productsAlphaLowestBrand($id, Product $product) {
+    public function productsAlphaLowestBrand($id, Product $product)
+    {
 
         // Get the Brand ID
         $brands = Brand::where('id', '=', $id)->get();
@@ -345,7 +354,8 @@ class OrderByController extends ProductsController {
      * @param Product $product
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function productsNewestBrand($id, Product $product) {
+    public function productsNewestBrand($id, Product $product)
+    {
 
         // Get the Brand ID
         $brands = Brand::where('id', '=', $id)->get();
@@ -373,6 +383,4 @@ class OrderByController extends ProductsController {
 
         return view('brand.show', ['products' => $products], compact('brands', 'category', 'brand', 'search', 'count', 'cart_count'));
     }
-
-
 }

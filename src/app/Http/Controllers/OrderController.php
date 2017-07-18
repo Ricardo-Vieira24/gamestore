@@ -18,8 +18,8 @@ use App\Http\Traits\CategoryTrait;
 use App\Http\Traits\SearchTrait;
 use App\Http\Traits\CartTrait;
 
-
-class OrderController extends Controller {
+class OrderController extends Controller
+{
 
     
     use BrandAllTrait, CategoryTrait, SearchTrait, CartTrait;
@@ -27,10 +27,11 @@ class OrderController extends Controller {
 
     /**
      * Show products in Order view
-     * 
+     *
      * @return mixed
      */
-    public function index() {
+    public function index()
+    {
 
         // From Traits/SearchTrait.php
         // Enables capabilities search to be preformed on this view )
@@ -77,11 +78,12 @@ class OrderController extends Controller {
 
     /**
      * Make the order when user enters all credentials
-     * 
+     *
      * @param Request $request
      * @return mixed
      */
-    public function postOrder(Request $request) {
+    public function postOrder(Request $request)
+    {
 
         // Validate each form field
         $validator = Validator::make($request->all(), [
@@ -134,21 +136,20 @@ class OrderController extends Controller {
         
         // Create the charge on Stripe's servers - this will charge the user's card
         try {
-            $charge = \Stripe\Charge::create(array(
+            $charge = \Stripe\Charge::create([
                 'source' => $request->input('stripeToken'),
                 'amount' => $charge_amount, // amount in cents, again
                 'currency' => 'usd',
-            ));
-
-        } catch(\Stripe\Error\Card $e) {
+            ]);
+        } catch (\Stripe\Error\Card $e) {
             // The card has been declined
             echo $e;
         }
 
 
         // Create the order in DB, and assign each variable to the correct form fields
-        $order = Order::create (
-            array(
+        $order = Order::create(
+            [
                 'user_id'    => $user_id,
                 'first_name' => $first_name,
                 'last_name'  => $last_name,
@@ -159,17 +160,18 @@ class OrderController extends Controller {
                 'zip'        => $zip,
                 'total'      => $cart_total,
                 'full_name'  => $full_name,
-            ));
+            ]
+        );
 
         // Attach all cart items to the pivot table with their fields
         foreach ($cart_products as $order_products) {
-            $order->orderItems()->attach($order_products->product_id, array(
+            $order->orderItems()->attach($order_products->product_id, [
                 'qty'    => $order_products->qty,
                 'price'  => $order_products->products->price,
                 'reduced_price'  => $order_products->products->reduced_price,
                 'total'  => $order_products->products->price * $order_products->qty,
                 'total_reduced'  => $order_products->products->reduced_price * $order_products->qty,
-            ));
+            ]);
         }
 
 
@@ -184,8 +186,5 @@ class OrderController extends Controller {
         flash()->success('Success', 'Your order was processed successfully.');
 
         return redirect()->route('cart');
-
     }
-    
-
 }

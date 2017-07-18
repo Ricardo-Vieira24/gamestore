@@ -7,7 +7,8 @@
  * @return \Illuminate\Foundation\Application|mixed
  * For the flash messages.
  */
-function flash($title = null, $message = null) {
+function flash($title = null, $message = null)
+{
     // Set variable $flash to fetch the Flash Class
     // in Flash.php
     $flash = app('App\Http\Flash');
@@ -27,6 +28,7 @@ function flash($title = null, $message = null) {
  * @return bool|string
  * Format the time to this
  */
-function prettyDate($date) {
+function prettyDate($date)
+{
     return date("M d, Y", strtotime($date));
 }

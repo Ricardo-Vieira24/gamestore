@@ -4,7 +4,8 @@ namespace App;
 
 use Image;
 
-class Thumbnail {
+class Thumbnail
+{
 
 
     /**
@@ -13,10 +14,10 @@ class Thumbnail {
      * @param $src
      * @param $destination
      */
-    public function make($src, $destination) {
+    public function make($src, $destination)
+    {
         Image::make($src)
             ->fit(200)
             ->save($destination);
     }
-
 }

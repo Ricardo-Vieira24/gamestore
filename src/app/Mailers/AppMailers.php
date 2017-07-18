@@ -5,7 +5,8 @@ namespace App\Mailers;
 use App\User;
 use Illuminate\Contracts\Mail\Mailer;
 
-class AppMailers {
+class AppMailers
+{
 
     /**
      * @var Mailer
@@ -47,7 +48,8 @@ class AppMailers {
      *
      * @param User $user
      */
-    public function sendEmailConfirmationTo(User $user) {
+    public function sendEmailConfirmationTo(User $user)
+    {
         // Send this to the users email.
         $this->to = $user->email;
         // Pass the view to this...
@@ -62,11 +64,11 @@ class AppMailers {
     /**
      * Delivery email to user.
      */
-    public function deliver() {
-        $this->mailer->send($this->view, $this->data, function($message) {
+    public function deliver()
+    {
+        $this->mailer->send($this->view, $this->data, function ($message) {
             $message->from($this->from, 'Administrator')
                 ->to($this->to);
         });
     }
-
 }

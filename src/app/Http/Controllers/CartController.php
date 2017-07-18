@@ -15,7 +15,8 @@ use App\Http\Traits\CategoryTrait;
 use App\Http\Traits\SearchTrait;
 use App\Http\Traits\CartTrait;
 
-class CartController extends Controller {
+class CartController extends Controller
+{
 
     use BrandAllTrait, CategoryTrait, SearchTrait, CartTrait;
 
@@ -23,7 +24,8 @@ class CartController extends Controller {
     /**
      * CartController constructor.
      */
-    public function __construct() {
+    public function __construct()
+    {
         $this->middleware('auth');
         // Reference the main constructor.
         parent::__construct();
@@ -32,10 +34,11 @@ class CartController extends Controller {
 
     /**
      * Return the Cart page with the cart items and total
-     * 
+     *
      * @return mixed
      */
-    public function showCart() {
+    public function showCart()
+    {
 
         // Set the $user_id the the currently authenticated user
         $user_id = Auth::user()->id;
@@ -74,16 +77,17 @@ class CartController extends Controller {
 
     /**
      * Add Products to the cart
-     * 
+     *
      * @return mixed
      */
-    public function addCart() {
+    public function addCart()
+    {
 
         // Assign validation rules
-        $rules = array(
+        $rules = [
             'qty' => 'required|numeric',
             'product'   => 'required|numeric|exists:products,id'
-        );
+        ];
 
         // Apply validation
         $validator = Validator::make(Input::all(), $rules);
@@ -117,26 +121,26 @@ class CartController extends Controller {
 
         // Create the Cart
         Cart::create(
-            array (
+            [
                 'user_id'    => $user_id,
                 'product_id' => $product_id,
                 'qty'        => $qty,
                 'total'      => $total
-            )
+             ]
         );
 
         // then redirect back
         return redirect()->route('cart');
-
     }
 
 
     /**
      * Update the Cart
-     * 
+     *
      * @return mixed
      */
-    public function update() {
+    public function update()
+    {
         
         // Set $user_id to the currently signed in user ID
         $user_id = Auth::user()->id;
@@ -163,12 +167,12 @@ class CartController extends Controller {
         $cart = Cart::where('user_id', '=', $user_id)->where('product_id', '=', $product_id)->where('id', '=', $cart_id);
 
         // Update your cart
-        $cart->update(array(
+        $cart->update([
             'user_id'    => $user_id,
             'product_id' => $product_id,
             'qty'        => $qty,
             'total'      => $total
-        ));
+        ]);
 
         return redirect()->route('cart');
     }
@@ -180,13 +184,12 @@ class CartController extends Controller {
      * @param $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function delete($id) {
+    public function delete($id)
+    {
         // Find the Carts table and given ID, and delete the record
         Cart::find($id)->delete();
 
         // Then redirect back
         return redirect()->back();
     }
-    
-    
 }

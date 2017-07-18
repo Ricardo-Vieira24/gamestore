@@ -17,7 +17,8 @@ class Controller extends BaseController
     /**
      * Make a constructor to initialize Auth check.
      */
-    public function __construct() {
+    public function __construct()
+    {
         // set user = to the currently authenticated user.
         $this->user = Auth::user();
 

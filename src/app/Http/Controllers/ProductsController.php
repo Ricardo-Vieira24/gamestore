@@ -15,8 +15,8 @@ use App\Http\Traits\CategoryTrait;
 use App\Http\Traits\SearchTrait;
 use App\Http\Traits\CartTrait;
 
-
-class ProductsController extends Controller {
+class ProductsController extends Controller
+{
 
     use BrandAllTrait, CategoryTrait, SearchTrait, CartTrait;
 
@@ -26,7 +26,8 @@ class ProductsController extends Controller {
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function showProducts() {
+    public function showProducts()
+    {
 
         // Get all latest products, and paginate them by 10 products per page
         $product = Product::latest('created_at')->paginate(10);
@@ -47,7 +48,8 @@ class ProductsController extends Controller {
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function addProduct() {
+    public function addProduct()
+    {
         // From Traits/CategoryTrait.php
         // ( This is to populate the parent category drop down in create product page )
         $categories = $this->parentCategory();
@@ -70,13 +72,14 @@ class ProductsController extends Controller {
      * @param ProductRequest $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function addPostProduct(ProductRequest $request) {
+    public function addPostProduct(ProductRequest $request)
+    {
 
         // Check if checkbox is checked or not for featured product
         $featured = Input::has('featured') ? true : false;
 
         // Replace any "/" with a space.
-        $product_name =  str_replace("/", " " ,$request->input('product_name'));
+        $product_name =  str_replace("/", " ", $request->input('product_name'));
 
 
        // if (Auth::user()->id == 2) {
@@ -117,7 +120,8 @@ class ProductsController extends Controller {
      *
      * @return \Illuminate\Http\Response
      */
-    public function categoryAPI() {
+    public function categoryAPI()
+    {
         // Get the "option" value from the drop-down.
         $input = Input::get('option');
 
@@ -139,7 +143,8 @@ class ProductsController extends Controller {
      * @param $id
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function editProduct($id) {
+    public function editProduct($id)
+    {
 
         // Find the product ID
         $product = Product::where('id', '=', $id)->find($id);
@@ -163,7 +168,6 @@ class ProductsController extends Controller {
 
         // Return view with products and categories
         return view('admin.product.edit', compact('product', 'categories', 'brands', 'cart_count'));
-
     }
 
 
@@ -174,7 +178,8 @@ class ProductsController extends Controller {
      * @param ProductEditRequest $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function updateProduct($id, ProductEditRequest $request) {
+    public function updateProduct($id, ProductEditRequest $request)
+    {
 
         // Check if checkbox is checked or not for featured product
         $featured = Input::has('featured') ? true : false;
@@ -188,7 +193,7 @@ class ProductsController extends Controller {
             flash()->error('Error', 'Cannot edit Product because you are signed in as a test user.');
         } else {
             // Update product
-            $product->update(array(
+            $product->update([
                 'product_name' => $request->input('product_name'),
                 'product_qty' => $request->input('product_qty'),
                 'product_sku' => $request->input('product_sku'),
@@ -199,7 +204,7 @@ class ProductsController extends Controller {
                 'featured' => $featured,
                 'description' => $request->input('description'),
                 'product_spec' => $request->input('product_spec'),
-            ));
+            ]);
 
 
             // Update the product with all the validation rules
@@ -220,7 +225,8 @@ class ProductsController extends Controller {
      * @param $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function deleteProduct($id) {
+    public function deleteProduct($id)
+    {
 
         if (Auth::user()->id == 2) {
             // If user is a test user (id = 2),display message saying you cant delete if your a test user
@@ -241,7 +247,8 @@ class ProductsController extends Controller {
      * @param $id
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function displayImageUploadPage($id) {
+    public function displayImageUploadPage($id)
+    {
 
         // Get the product ID that matches the URL product ID.
         $product = Product::where('id', '=', $id)->get();
@@ -260,7 +267,8 @@ class ProductsController extends Controller {
      * @param $product_name
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function show($product_name) {
+    public function show($product_name)
+    {
 
         // Find the product by the product name in URL
         $product = Product::ProductLocatedAt($product_name);
@@ -289,6 +297,4 @@ class ProductsController extends Controller {
 
         return view('pages.show_product', compact('product', 'search', 'brands', 'categories', 'similar_product', 'cart_count'));
     }
-
-
 }

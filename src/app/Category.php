@@ -5,7 +5,8 @@ namespace App;
 use App\Product;
 use Illuminate\Database\Eloquent\Model;
 
-class Category extends Model {
+class Category extends Model
+{
 
     protected $table = 'categories';
 
@@ -19,7 +20,8 @@ class Category extends Model {
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function parent() {
+    public function parent()
+    {
         return $this->belongsTo('App\Category', 'parent_id');
     }
 
@@ -29,7 +31,8 @@ class Category extends Model {
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function children() {
+    public function children()
+    {
         return $this->hasMany('App\Category', 'parent_id');
     }
 
@@ -39,7 +42,8 @@ class Category extends Model {
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function product() {
+    public function product()
+    {
         return $this->hasMany('App\Product', 'id');
     }
 
@@ -47,7 +51,8 @@ class Category extends Model {
     /**
      * Delete all sub categories when Main (Parent) category is deleted.
      */
-    public static function boot() {
+    public static function boot()
+    {
         // Reference the parent::boot() class.
         parent::boot();
 
@@ -57,12 +62,10 @@ class Category extends Model {
         //    $category->children()->delete();
         //});
 
-        Category::deleting(function($category) {
-            foreach($category->children as $subcategory){
+        Category::deleting(function ($category) {
+            foreach ($category->children as $subcategory) {
                 $subcategory->delete();
             }
         });
     }
-
-
 }

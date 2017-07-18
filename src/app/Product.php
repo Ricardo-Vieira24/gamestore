@@ -7,7 +7,8 @@ use App\Brand;
 use App\Category;
 use Illuminate\Database\Eloquent\Model;
 
-class Product extends Model {
+class Product extends Model
+{
 
     protected $table = 'products';
 
@@ -32,7 +33,8 @@ class Product extends Model {
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
-    public function category() {
+    public function category()
+    {
         return $this->hasOne('App\Category', 'id');
     }
 
@@ -44,7 +46,8 @@ class Product extends Model {
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
-    public function brand() {
+    public function brand()
+    {
         return $this->belongsTo('App\Brand');
     }
 
@@ -55,7 +58,8 @@ class Product extends Model {
      * @param ProductPhoto $ProductPhoto
      * @return Model
      */
-    public function addPhoto(ProductPhoto $ProductPhoto) {
+    public function addPhoto(ProductPhoto $ProductPhoto)
+    {
         return $this->photos()->save($ProductPhoto);
     }
 
@@ -65,7 +69,8 @@ class Product extends Model {
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function photos() {
+    public function photos()
+    {
         return $this->hasMany('App\ProductPhoto');
     }
 
@@ -75,7 +80,8 @@ class Product extends Model {
      *
      * @return mixed
      */
-    public function featuredPhoto() {
+    public function featuredPhoto()
+    {
         return $this->hasOne('App\ProductPhoto')->whereFeatured(true);
     }
 
@@ -86,7 +92,8 @@ class Product extends Model {
      * @param $id
      * @return mixed
      */
-    public static function LocatedAt($id) {
+    public static function LocatedAt($id)
+    {
         return static::where(compact('id'))->firstOrFail();
     }
 
@@ -97,9 +104,8 @@ class Product extends Model {
      * @param $product_name
      * @return mixed
      */
-    public static function ProductLocatedAt($product_name) {
+    public static function ProductLocatedAt($product_name)
+    {
         return static::where(compact('product_name'))->firstOrFail();
     }
-
-
 }

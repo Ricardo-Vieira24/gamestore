@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace App\Http\Controllers;
 
@@ -11,8 +11,8 @@ use App\Http\Traits\CartTrait;
 use App\Http\Traits\BrandAllTrait;
 use Illuminate\Support\Facades\Auth;
 
-
-class BrandsController extends Controller {
+class BrandsController extends Controller
+{
 
     use BrandAllTrait, CartTrait;
 
@@ -22,7 +22,8 @@ class BrandsController extends Controller {
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function index() {
+    public function index()
+    {
 
         // From Traits/BrandAll.php
         // Get all the Brands
@@ -42,7 +43,8 @@ class BrandsController extends Controller {
      * @param $id
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function getProductsForBrand($id) {
+    public function getProductsForBrand($id)
+    {
 
         // Get the Brand name under this id
         $brands = Brand::where('id', '=', $id)->get();
@@ -66,7 +68,8 @@ class BrandsController extends Controller {
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function create() {
+    public function create()
+    {
 
         // From Traits/CartTrait.php
         // ( Count how many items in Cart for signed in user )
@@ -82,7 +85,8 @@ class BrandsController extends Controller {
      * @param BrandsRequest $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(BrandsRequest $request) {
+    public function store(BrandsRequest $request)
+    {
 
         // Get all the validation rules for Brands and assign it to the Brand Model
         $brands = new Brand($request->all());
@@ -109,7 +113,8 @@ class BrandsController extends Controller {
      * @param $id
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|\Illuminate\View\View
      */
-    public function edit($id) {
+    public function edit($id)
+    {
 
         // Get a brand with an ID that is the same as in URL
         $brands = Brand::where('id', '=', $id)->find($id);
@@ -136,7 +141,8 @@ class BrandsController extends Controller {
      * @param BrandsRequest $request
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function update($id, BrandsRequest $request) {
+    public function update($id, BrandsRequest $request)
+    {
 
         // Find the brand ID in URL route
         $brands = Brand::findOrFail($id);
@@ -163,7 +169,8 @@ class BrandsController extends Controller {
      * @param $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function delete($id) {
+    public function delete($id)
+    {
 
         // Find the Brand ID in the URl route
         $delete = Brand::findOrFail($id);
@@ -186,6 +193,4 @@ class BrandsController extends Controller {
 
         return redirect()->back();
     }
-
-
 }

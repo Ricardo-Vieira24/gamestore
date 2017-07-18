@@ -2,9 +2,11 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Foundation\Http\FormRequest;
 use App\Http\Requests\Request;
 
-class BrandsRequest extends Request {
+class BrandsRequest extends FormRequest
+{
 
     /**
      * Determine if the user is authorized to make this request.
@@ -21,10 +23,10 @@ class BrandsRequest extends Request {
      *
      * @return array
      */
-    public function rules() {
+    public function rules()
+    {
         return [
             'brand_name' => 'required|max:40|min:2|unique:brands',
         ];
     }
-
 }

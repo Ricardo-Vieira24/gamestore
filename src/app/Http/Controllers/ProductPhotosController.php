@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace App\Http\Controllers;
 
@@ -10,14 +10,16 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Input;
 use App\Http\Requests\ProductPhotoRequest;
 
-class ProductPhotosController extends Controller {
+class ProductPhotosController extends Controller
+{
 
 
     /**
      * @param $id
      * @param ProductPhotoRequest $request
      */
-    public function store($id, ProductPhotoRequest $request) {
+    public function store($id, ProductPhotoRequest $request)
+    {
         // Set $product = Product::LocatedAt() in (Product.php Model) = to the id
         // -- Find the product.
         $product = Product::LocatedAt($id);
@@ -35,7 +37,8 @@ class ProductPhotosController extends Controller {
      * @param $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy($id) {
+    public function destroy($id)
+    {
         // Find the photo and delete it.
         ProductPhoto::findOrFail($id)->delete();
         // Then return back;
@@ -50,7 +53,8 @@ class ProductPhotosController extends Controller {
      * @param Request $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function storeFeaturedPhoto($id, Request $request) {
+    public function storeFeaturedPhoto($id, Request $request)
+    {
         // Validate featured button
         $this->validate($request, [
             'featured' => 'required|exists:product_images,id'
@@ -69,6 +73,4 @@ class ProductPhotosController extends Controller {
         // Return redirect back
         return redirect()->back();
     }
-
-
 }
