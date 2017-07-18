@@ -37,8 +37,8 @@ class Order extends Model
      *
      * @return $this
      */
-    public function orderItems() {
+    public function orderItems()
+    {
         return $this->belongsToMany('App\Product')->withPivot('qty', 'price', 'reduced_price', 'total', 'total_reduced');
     }
-
 }

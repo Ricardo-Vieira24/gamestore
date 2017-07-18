@@ -18,10 +18,10 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/', 'PagesController@index');
 
     /** Display Products by category Route **/
-    Route::get('category/{id}','PagesController@displayProducts');
+    Route::get('category/{id}', 'PagesController@displayProducts');
 
     /** Display Products by Brand Route **/
-    Route::get('brand/{id}','PagesController@displayProductsByBrand');
+    Route::get('brand/{id}', 'PagesController@displayProductsByBrand');
 
     /** Route to post search results **/
     Route::post('/queries', [
@@ -186,12 +186,14 @@ Route::group(['middleware' => ['web']], function () {
 
 
     /** Post an Order **/
-    Route::post('/order',
+    Route::post(
+        '/order',
         array(
             'before' => 'auth.basic',
             'as'     => 'order',
             'uses'   => 'OrderController@postOrder'
-        ));
+        )
+    );
 
 
     /******************************************* User Profile Routes below ************************************************/
@@ -199,19 +201,18 @@ Route::group(['middleware' => ['web']], function () {
 
     /** Resource route for Profile **/
     Route::resource('profile', 'ProfileController');
-    
 });
 
 
 
-Route::group(["middleware" => 'admin'], function(){
+Route::group(["middleware" => 'admin'], function () {
 
     /** Show the Admin Dashboard **/
-   Route::get('admin/dashboard', [
+    Route::get('admin/dashboard', [
        'uses' => '\App\Http\Controllers\AdminController@index',
        'as'   => 'admin.pages.index',
        'middleware' => ['auth'],
-   ]);
+    ]);
 
     /** Show the Admin Categories **/
     Route::get('admin/categories', [
@@ -411,6 +412,4 @@ Route::group(["middleware" => 'admin'], function(){
     Route::post('/admin/update', [
         'uses' => 'AdminController@update'
     ]);
-
 });
-

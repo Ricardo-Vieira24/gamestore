@@ -4,7 +4,8 @@ namespace App\Http\Requests;
 
 use App\Http\Requests\Request;
 
-class ProductRequest extends Request {
+class ProductRequest extends Request
+{
 
     /**
      * Determine if the user is authorized to make this request.
@@ -21,7 +22,8 @@ class ProductRequest extends Request {
      *
      * @return array
      */
-    public function rules() {
+    public function rules()
+    {
         return [
             'product_name' => 'required|max:75|min:3|unique:products',
             'product_qty' => 'required|max:2|min:1',
@@ -35,5 +37,4 @@ class ProductRequest extends Request {
             'product_spec' => 'max:3500',
         ];
     }
-
 }

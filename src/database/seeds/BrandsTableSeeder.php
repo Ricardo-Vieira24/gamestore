@@ -48,5 +48,4 @@ class BrandsTableSeeder extends Seeder
             'brand_name' => 'Turtle Beach',
         ]);
     }
-
 }

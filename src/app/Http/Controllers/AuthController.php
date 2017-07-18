@@ -31,7 +31,8 @@ class AuthController extends Controller
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function getRegister() {
+    public function getRegister()
+    {
         // Gets the query string from our form submission
         $query = Input::get('search');
 
@@ -50,7 +51,8 @@ class AuthController extends Controller
      * @param AppMailers $mailer
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function postRegister(RegistrationRequest $request, AppMailers $mailer) {
+    public function postRegister(RegistrationRequest $request, AppMailers $mailer)
+    {
 
         // Create the user in the DB.
         $user = User::create([
@@ -70,7 +72,6 @@ class AuthController extends Controller
         flash()->overlay('Info', 'Please confirm your email address in your inbox.');
 
         return redirect()->back();
-
     }
 
 
@@ -81,7 +82,8 @@ class AuthController extends Controller
      * @param $token
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function confirmEmail($token) {
+    public function confirmEmail($token)
+    {
         // Get the user with token, or fail.
         User::whereToken($token)->firstOrFail()->confirmEmail();
 
@@ -101,7 +103,8 @@ class AuthController extends Controller
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function getLogin() {
+    public function getLogin()
+    {
         // Gets the query string from our form submission
         $query = Input::get('search');
 
@@ -119,7 +122,8 @@ class AuthController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function postLogin(Request $request) {
+    public function postLogin(Request $request)
+    {
 
         // Validate email and password.
         $this->validate($request, [
@@ -146,7 +150,8 @@ class AuthController extends Controller
      * @param  Request $request
      * @return boolean
      */
-    protected function signIn(Request $request) {
+    protected function signIn(Request $request)
+    {
         return Auth::attempt($this->getCredentials($request), $request->has('remember'));
     }
 
@@ -157,7 +162,8 @@ class AuthController extends Controller
      * @param Request $request
      * @return array
      */
-    protected function getCredentials(Request $request) {
+    protected function getCredentials(Request $request)
+    {
         return [
             'email'    => $request->input('email'),
             'password' => $request->input('password'),
@@ -171,10 +177,9 @@ class AuthController extends Controller
      *
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function logout() {
+    public function logout()
+    {
         Auth::logout();
         return redirect('/');
     }
-
-
 }

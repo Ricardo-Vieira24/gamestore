@@ -32,7 +32,8 @@ class Flash
      * @param $message
      * @return mixed
      */
-    public function success($title, $message) {
+    public function success($title, $message)
+    {
         return $this->create($title, $message, 'success');
     }
 
@@ -44,7 +45,8 @@ class Flash
      * @param $message
      * @return mixed
      */
-    public function error($title, $message) {
+    public function error($title, $message)
+    {
         return $this->create($title, $message, 'error');
     }
 
@@ -56,7 +58,8 @@ class Flash
      * @param $message
      * @return mixed
      */
-    public function info($title, $message) {
+    public function info($title, $message)
+    {
         return $this->create($title, $message, 'info');
     }
 
@@ -69,7 +72,8 @@ class Flash
      * @param string $level
      * @return mixed
      */
-    public function overlay($title, $message, $level = 'info') {
+    public function overlay($title, $message, $level = 'info')
+    {
         return $this->create($title, $message, $level, 'flash_message_overlay');
     }
 
@@ -82,8 +86,8 @@ class Flash
      * @param string $level
      * @return mixed
      */
-    public function customErrorOverlay($title, $message, $level = 'error') {
+    public function customErrorOverlay($title, $message, $level = 'error')
+    {
         return $this->create($title, $message, $level, 'flash_message_custom_error_overlay');
     }
-
 }

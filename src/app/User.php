@@ -41,13 +41,14 @@ class User extends Authenticatable
      * Make a boot function to listen
      * to any model events that are fired below.
      */
-    public static function boot() {
+    public static function boot()
+    {
         // Reference the parent class
         parent::boot();
 
         // When we are creating a record (for user registration),
         // then we want to set a token to some random string.
-        static::creating(function($user) {
+        static::creating(function ($user) {
             $user->token = str_random(30);
         });
     }
@@ -59,11 +60,10 @@ class User extends Authenticatable
      * token to a NULL value,
      * then save the results.
      */
-    public function confirmEmail() {
+    public function confirmEmail()
+    {
         $this->verified = true;
         $this->token = null;
         $this->save();
     }
-    
-    
 }

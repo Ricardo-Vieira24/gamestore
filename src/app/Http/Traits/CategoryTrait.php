@@ -3,10 +3,12 @@ namespace App\Http\Traits;
 
 use App\Category;
 
-trait CategoryTrait {
+trait CategoryTrait
+{
 
 
-    public function categoryAll() {
+    public function categoryAll()
+    {
         // Get all the brands from the Brands Table.
         return Category::whereNull('parent_id')->with('children')->get();
     }
@@ -18,8 +20,8 @@ trait CategoryTrait {
      *
      * @return mixed
      */
-    public function parentCategory() {
+    public function parentCategory()
+    {
         return Category::whereNull('parent_id')->get();
     }
-
 }

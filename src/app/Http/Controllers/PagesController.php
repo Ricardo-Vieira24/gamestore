@@ -14,8 +14,8 @@ use App\Http\Traits\CategoryTrait;
 use App\Http\Traits\SearchTrait;
 use App\Http\Traits\CartTrait;
 
-
-class PagesController extends Controller {
+class PagesController extends Controller
+{
 
     use BrandAllTrait, CategoryTrait, SearchTrait, CartTrait;
 
@@ -25,7 +25,8 @@ class PagesController extends Controller {
      *
      * @return $this
      */
-    public function index() {
+    public function index()
+    {
 
         // From Traits/CategoryTrait.php
         // ( Show Categories in side-nav )
@@ -64,7 +65,8 @@ class PagesController extends Controller {
      * @param $id
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function displayProducts($id) {
+    public function displayProducts($id)
+    {
 
         // Get the Category ID , so we can display the category name under each list view
         $categories = Category::where('id', '=', $id)->get();
@@ -89,7 +91,7 @@ class PagesController extends Controller {
         $search = $this->search();
 
         // Get the Products under the Category ID
-        $products = Product::where('cat_id','=', $id)->get();
+        $products = Product::where('cat_id', '=', $id)->get();
 
         // Count the products under a certain category
         $count = $products->count();
@@ -98,7 +100,7 @@ class PagesController extends Controller {
         // ( Count how many items in Cart for signed in user )
         $cart_count = $this->countProductsInCart();
 
-        return view('category.show', compact('products', 'categories','brands', 'category', 'search', 'cart_count'))->with('count', $count);
+        return view('category.show', compact('products', 'categories', 'brands', 'category', 'search', 'cart_count'))->with('count', $count);
     }
 
 
@@ -107,7 +109,8 @@ class PagesController extends Controller {
      * @param $id
      * @return $this
      */
-    public function displayProductsByBrand($id) {
+    public function displayProductsByBrand($id)
+    {
 
         // Get the Brand ID , so we can display the brand name under each list view
         $brands = Brand::where('id', '=', $id)->get();
@@ -143,5 +146,4 @@ class PagesController extends Controller {
 
         return view('brand.show', compact('products', 'brands', 'brand', 'category', 'search', 'cart_count'))->with('count', $count);
     }
-
 }

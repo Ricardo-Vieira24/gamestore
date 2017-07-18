@@ -12,8 +12,8 @@ use App\Http\Traits\BrandAllTrait;
 use App\Http\Traits\CategoryTrait;
 use App\Http\Traits\CartTrait;
 
-
-class QueryController extends Controller {
+class QueryController extends Controller
+{
 
     use BrandAllTrait, CategoryTrait, CartTrait;
 
@@ -23,7 +23,8 @@ class QueryController extends Controller {
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function search() {
+    public function search()
+    {
 
         // From Traits/CategoryTrait.php
         // ( Show Categories in side-nav )
@@ -53,6 +54,4 @@ class QueryController extends Controller {
         // Return a view and pass the view the list of products and the original query.
         return view('pages.search', compact('search', 'query', 'categories', 'brands', 'cart_count'));
     }
-
-
 }

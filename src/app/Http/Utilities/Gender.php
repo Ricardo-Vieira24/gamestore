@@ -2,7 +2,8 @@
 
 namespace App\Http\Utilities;
 
-class Gender {
+class Gender
+{
 
     /**
      * Array of genders.
@@ -23,8 +24,8 @@ class Gender {
      *
      * @return array
      */
-    public static function all() {
+    public static function all()
+    {
         return array_keys(static::$genders);
     }
-
 }

@@ -29,7 +29,7 @@ return [
     |
     */
 
-    'host' => env('MAIL_HOST',  'smtp.live.com'),
+    'host' => env('MAIL_HOST', 'smtp.live.com'),
 
     /*
     |--------------------------------------------------------------------------

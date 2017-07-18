@@ -4,7 +4,8 @@ namespace App;
 
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
-class AddPhotoToProduct {
+class AddPhotoToProduct
+{
 
     /**
      * @var Product
@@ -27,7 +28,8 @@ class AddPhotoToProduct {
      * @param UploadedFile $file
      * @param Thumbnail|null $thumbnail
      */
-    public function __construct(Product $product, UploadedFile $file, Thumbnail $thumbnail = null) {
+    public function __construct(Product $product, UploadedFile $file, Thumbnail $thumbnail = null)
+    {
         $this->product = $product;
         $this->file = $file;
         $this->thumbnail = $thumbnail ?: new Thumbnail;
@@ -37,7 +39,8 @@ class AddPhotoToProduct {
     /**
      * Process the form.
      */
-    public function save() {
+    public function save()
+    {
 
         // Attach the photo to the product.
         $photo = $this->product->addPhoto($this->makePhoto());
@@ -55,7 +58,8 @@ class AddPhotoToProduct {
      *
      * @return ProductPhoto
      */
-    protected function makePhoto() {
+    protected function makePhoto()
+    {
         return new ProductPhoto(['name' => $this->makeFilename()]);
     }
 
@@ -65,11 +69,12 @@ class AddPhotoToProduct {
      *
      * @return string
      */
-    protected function makeFilename() {
+    protected function makeFilename()
+    {
 
         // Get the file name original name
         // and encrypt it with sha1
-        $name = sha1 (
+        $name = sha1(
             time() . $this->file->getClientOriginalName()
         );
 
@@ -79,5 +84,4 @@ class AddPhotoToProduct {
         // Then set name = merge those together.
         return "{$name}.{$extension}";
     }
-
 }

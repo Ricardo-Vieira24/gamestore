@@ -12,8 +12,8 @@ use App\Http\Traits\BrandAllTrait;
 use App\Http\Traits\CategoryTrait;
 use Illuminate\Support\Facades\Auth;
 
-
-class CategoriesController extends Controller {
+class CategoriesController extends Controller
+{
 
     use BrandAllTrait, CategoryTrait, CartTrait;
 
@@ -23,7 +23,8 @@ class CategoriesController extends Controller {
      *
      * @return $this
      */
-    public function showCategories() {
+    public function showCategories()
+    {
 
         // From Traits/CategoryTrait.php
         // ( Show Categories in side-nav )
@@ -43,7 +44,8 @@ class CategoriesController extends Controller {
      * @param $id
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function getProductsForSubCategory($id) {
+    public function getProductsForSubCategory($id)
+    {
 
         // Get the Category name under this category
         $categories = Category::where('id', '=', $id)->get();
@@ -67,7 +69,8 @@ class CategoriesController extends Controller {
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function addCategories() {
+    public function addCategories()
+    {
 
         // From Traits/CartTrait.php
         // ( Count how many items in Cart for signed in user )
@@ -83,7 +86,8 @@ class CategoriesController extends Controller {
      * @param CategoryRequest $request
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function addPostCategories(CategoryRequest $request) {
+    public function addPostCategories(CategoryRequest $request)
+    {
         // Assign $category to the Category Model, and request all validation rules
         $category = new Category($request->all());
 
@@ -110,7 +114,8 @@ class CategoriesController extends Controller {
      * @param $id
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function editCategories($id) {
+    public function editCategories($id)
+    {
         // Select all from categories where the id = the id on the page
         $category = Category::where('id', '=', $id)->find($id);
 
@@ -134,7 +139,8 @@ class CategoriesController extends Controller {
      * @param CategoryRequest $request
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function updateCategories($id, CategoryRequest $request) {
+    public function updateCategories($id, CategoryRequest $request)
+    {
         // Find the category id being updated
         $category = Category::findOrFail($id);
 
@@ -159,7 +165,8 @@ class CategoriesController extends Controller {
      * @param $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function deleteCategories($id) {
+    public function deleteCategories($id)
+    {
         // Find the category id and delete it from DB.
         $delete = Category::findOrFail($id);
 
@@ -192,7 +199,8 @@ class CategoriesController extends Controller {
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function addSubCategories($id) {
+    public function addSubCategories($id)
+    {
 
         $category = Category::findOrFail($id);
 
@@ -211,7 +219,8 @@ class CategoriesController extends Controller {
      * @param CategoryRequest $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function addPostSubCategories($id, CategoryRequest $request) {
+    public function addPostSubCategories($id, CategoryRequest $request)
+    {
 
         // Find the Parent Category ID
         $category = Category::findOrFail($id);
@@ -241,7 +250,8 @@ class CategoriesController extends Controller {
      * @param $id
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function editSubCategories($id) {
+    public function editSubCategories($id)
+    {
         // Select all from categories where the id = the id on the page
         $category = Category::where('id', '=', $id)->find($id);
 
@@ -265,7 +275,8 @@ class CategoriesController extends Controller {
      * @param CategoryRequest $request
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function updateSubCategories($id, CategoryRequest $request) {
+    public function updateSubCategories($id, CategoryRequest $request)
+    {
         // Find the category id being updated
         $category = Category::findOrFail($id);
 
@@ -290,7 +301,8 @@ class CategoriesController extends Controller {
      * @param $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function deleteSubCategories($id) {
+    public function deleteSubCategories($id)
+    {
 
         // Find the sub-category id and delete it from DB.
         $delete_sub = Category::findOrFail($id);
@@ -316,5 +328,4 @@ class CategoriesController extends Controller {
         // Then redirect back.
         return redirect()->back();
     }
-
 }
