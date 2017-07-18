@@ -136,11 +136,11 @@ class OrderController extends Controller
         
         // Create the charge on Stripe's servers - this will charge the user's card
         try {
-            $charge = \Stripe\Charge::create(array(
+            $charge = \Stripe\Charge::create([
                 'source' => $request->input('stripeToken'),
                 'amount' => $charge_amount, // amount in cents, again
                 'currency' => 'usd',
-            ));
+            ]);
         } catch (\Stripe\Error\Card $e) {
             // The card has been declined
             echo $e;
@@ -149,7 +149,7 @@ class OrderController extends Controller
 
         // Create the order in DB, and assign each variable to the correct form fields
         $order = Order::create(
-            array(
+            [
                 'user_id'    => $user_id,
                 'first_name' => $first_name,
                 'last_name'  => $last_name,
@@ -160,18 +160,18 @@ class OrderController extends Controller
                 'zip'        => $zip,
                 'total'      => $cart_total,
                 'full_name'  => $full_name,
-            )
+            ]
         );
 
         // Attach all cart items to the pivot table with their fields
         foreach ($cart_products as $order_products) {
-            $order->orderItems()->attach($order_products->product_id, array(
+            $order->orderItems()->attach($order_products->product_id, [
                 'qty'    => $order_products->qty,
                 'price'  => $order_products->products->price,
                 'reduced_price'  => $order_products->products->reduced_price,
                 'total'  => $order_products->products->price * $order_products->qty,
                 'total_reduced'  => $order_products->products->reduced_price * $order_products->qty,
-            ));
+            ]);
         }
 
 

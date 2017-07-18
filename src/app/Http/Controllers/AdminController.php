@@ -133,9 +133,9 @@ class AdminController extends Controller
             flash()->error('Error', 'Cannot update product quantity because you are signed in as a test user.');
         } else {
             // Update your product qty
-            $product_qty->update(array(
+            $product_qty->update([
                 'product_qty' => $qty
-            ));
+            ]);
         }
 
 

@@ -193,7 +193,7 @@ class ProductsController extends Controller
             flash()->error('Error', 'Cannot edit Product because you are signed in as a test user.');
         } else {
             // Update product
-            $product->update(array(
+            $product->update([
                 'product_name' => $request->input('product_name'),
                 'product_qty' => $request->input('product_qty'),
                 'product_sku' => $request->input('product_sku'),
@@ -204,7 +204,7 @@ class ProductsController extends Controller
                 'featured' => $featured,
                 'description' => $request->input('description'),
                 'product_spec' => $request->input('product_spec'),
-            ));
+            ]);
 
 
             // Update the product with all the validation rules

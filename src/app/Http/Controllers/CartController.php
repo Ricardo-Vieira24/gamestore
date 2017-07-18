@@ -84,10 +84,10 @@ class CartController extends Controller
     {
 
         // Assign validation rules
-        $rules = array(
+        $rules = [
             'qty' => 'required|numeric',
             'product'   => 'required|numeric|exists:products,id'
-        );
+        ];
 
         // Apply validation
         $validator = Validator::make(Input::all(), $rules);
@@ -121,12 +121,12 @@ class CartController extends Controller
 
         // Create the Cart
         Cart::create(
-            array (
+             [
                 'user_id'    => $user_id,
                 'product_id' => $product_id,
                 'qty'        => $qty,
                 'total'      => $total
-            )
+            ]
         );
 
         // then redirect back
@@ -167,12 +167,12 @@ class CartController extends Controller
         $cart = Cart::where('user_id', '=', $user_id)->where('product_id', '=', $product_id)->where('id', '=', $cart_id);
 
         // Update your cart
-        $cart->update(array(
+        $cart->update([
             'user_id'    => $user_id,
             'product_id' => $product_id,
             'qty'        => $qty,
             'total'      => $total
-        ));
+        ]);
 
         return redirect()->route('cart');
     }

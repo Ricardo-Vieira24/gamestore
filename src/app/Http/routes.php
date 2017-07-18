@@ -149,17 +149,17 @@ Route::group(['middleware' => ['web']], function () {
     
     
     /** Get the view for Cart Page **/
-    Route::get('/cart', array(
+    Route::get('/cart', [
         'before' => 'auth.basic',
         'as'     => 'cart',
         'uses'   => 'CartController@showCart'
-    ));
+    ]);
 
     /** Add items in the cart **/
-    Route::post('/cart/add', array(
+    Route::post('/cart/add', [
         'before' => 'auth.basic',
         'uses'   => 'CartController@addCart'
-    ));
+    ]);
 
     /** Update items in the cart **/
     Route::post('/cart/update', [
@@ -167,11 +167,11 @@ Route::group(['middleware' => ['web']], function () {
     ]);
 
     /** Delete items in the cart **/
-    Route::get('/cart/delete/{id}', array(
+    Route::get('/cart/delete/{id}', [
         'before' => 'auth.basic',
         'as'     => 'delete_book_from_cart',
         'uses'   => 'CartController@delete'
-    ));
+    ]);
 
 
     /**************************************** Order Routes *********************************************/
@@ -188,11 +188,11 @@ Route::group(['middleware' => ['web']], function () {
     /** Post an Order **/
     Route::post(
         '/order',
-        array(
+        [
             'before' => 'auth.basic',
             'as'     => 'order',
             'uses'   => 'OrderController@postOrder'
-        )
+        ]
     );
 
 
